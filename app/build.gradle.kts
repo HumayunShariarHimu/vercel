@@ -10,10 +10,16 @@ android {
   applicationId="com.himu.vercelapp"
   minSdk=26
   targetSdk=35
-  versionCode=1
-  versionName="1.0.0"
-  buildConfigField("String","VERCEL_CLIENT_ID","\"CONFIGURE_IN_GITHUB_SECRETS\"")
+  versionCode=2
+  versionName="1.1.0"
+  val clientId = providers.gradleProperty("vercelClientId").orElse(providers.environmentVariable("VERCEL_CLIENT_ID")).orElse("CONFIGURE_VERCEL_CLIENT_ID").get()
+  buildConfigField("String","VERCEL_CLIENT_ID","\"" + clientId + "\"")
  }
+ compileOptions {
+  sourceCompatibility = JavaVersion.VERSION_17
+  targetCompatibility = JavaVersion.VERSION_17
+ }
+ kotlinOptions { jvmTarget = "17" }
  buildFeatures { compose=true; buildConfig=true }
 }
 dependencies {
