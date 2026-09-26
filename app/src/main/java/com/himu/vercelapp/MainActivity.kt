@@ -78,8 +78,8 @@ class MainActivity:ComponentActivity(){
    }
   }
   LaunchedEffect(logged){if(logged)load()}
-  NeonTheme{
-   if(!logged)Login(::login) else Dashboard(user,projects,deployments,loading,error,::load){store.clear();logged=false}
+  NeonTheme {
+   if(!logged) Login(::login) else Dashboard(user,projects,deployments,loading,error,::load,{store.clear();logged=false})
   }
  }
 
@@ -98,6 +98,7 @@ class MainActivity:ComponentActivity(){
 
  @Composable fun Dashboard(u:SessionUser?,p:List<Project>,d:List<Deployment>,loading:Boolean,error:String?,reload:()->Unit,logout:()->Unit){
   var tab by remember{mutableIntStateOf(0)}
+  @OptIn(ExperimentalMaterial3Api::class)
   Scaffold(containerColor=Color.Transparent,topBar={TopAppBar(title={Column{Text("Vercel",color=Color.White,fontWeight=FontWeight.Bold);Text(u?.email?:"Workspace",fontSize=10.sp,color=Color(0xFF9B7CFF))}},actions={TextButton(onClick=logout){Text("Sign out")}})},bottomBar={NavigationBar(containerColor=Color(0xFF0A0810)){listOf("Overview","Projects","Deployments").forEachIndexed{i,t->NavigationBarItem(selected=tab==i,onClick={tab=i},icon={Text(listOf("⌂","◆","↗")[i])},label={Text(t)})}}}){
    Column(Modifier.padding(it).padding(16.dp).fillMaxSize()){
     if(error!=null)Text(error,Modifier.padding(bottom=10.dp),color=Color(0xFFFF6B8A),fontSize=12.sp)
@@ -109,15 +110,15 @@ class MainActivity:ComponentActivity(){
  @Composable fun Overview(u:SessionUser?,p:List<Project>,d:List<Deployment>){
   LazyColumn(verticalArrangement=Arrangement.spacedBy(12.dp),contentPadding=PaddingValues(bottom=30.dp)){
    item{Text("Welcome back",fontSize=28.sp,fontWeight=FontWeight.Bold,color=Color.White);Text(u?.name?:"",color=Color(0xFFAAA7B8))}
-   item{Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(10.dp)){Stat("Projects",p.size);Stat("Deployments",d.size);Stat("Ready",d.count{it.state=="READY"})}}
+   item{Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(10.dp)){Stat(Modifier.weight(1f),"Projects",p.size);Stat(Modifier.weight(1f),"Deployments",d.size);Stat(Modifier.weight(1f),"Ready",d.count{it.state=="READY"})}}
    item{Text("Recent deployments",fontSize=18.sp,fontWeight=FontWeight.Bold,color=Color.White)}
    items(d.take(8)){DeploymentCard(it)}
   }
  }
- @Composable fun Stat(name:String,n:Int){Card(Modifier.weight(1f),colors=CardDefaults.cardColors(Color(0xFF15121E))){Column(Modifier.padding(14.dp)){Text(n.toString(),fontSize=24.sp,fontWeight=FontWeight.Bold,color=Color.White);Text(name,fontSize=11.sp,color=Color(0xFFAAA7B8))}}}
+ @Composable fun Stat(modifier:Modifier,name:String,n:Int){Card(modifier,colors=CardDefaults.cardColors(Color(0xFF15121E))){Column(Modifier.padding(14.dp)){Text(n.toString(),fontSize=24.sp,fontWeight=FontWeight.Bold,color=Color.White);Text(name,fontSize=11.sp,color=Color(0xFFAAA7B8))}}}
  @Composable fun ProjectList(p:List<Project>){LazyColumn(verticalArrangement=Arrangement.spacedBy(10.dp)){item{Text("Projects",fontSize=22.sp,fontWeight=FontWeight.Bold,color=Color.White)};items(p){Card(colors=CardDefaults.cardColors(Color(0xFF15121E))){Column(Modifier.padding(16.dp)){Text(it.name,color=Color.White,fontWeight=FontWeight.SemiBold);Text(it.framework?:"Framework not detected",color=Color(0xFF9B7CFF),fontSize=12.sp);Text("Project ID: "+it.id,color=Color(0xFF777384),fontSize=9.sp)}}}}}
  @Composable fun DeploymentList(d:List<Deployment>){LazyColumn(verticalArrangement=Arrangement.spacedBy(10.dp)){item{Text("Deployments",fontSize=22.sp,fontWeight=FontWeight.Bold,color=Color.White)};items(d){DeploymentCard(it)}}}
  @Composable fun DeploymentCard(d:Deployment){Card(Modifier.fillMaxWidth(),colors=CardDefaults.cardColors(Color(0xFF15121E))){Row(Modifier.padding(16.dp)){Column(Modifier.weight(1f)){Text(d.name.ifBlank{"Deployment"},color=Color.White,fontWeight=FontWeight.SemiBold);Text(d.state,color=if(d.state=="READY")Color(0xFF63F5AD) else Color(0xFFFFC857),fontSize=12.sp)};Text(d.url?:"",color=Color(0xFF9B7CFF),fontSize=9.sp)}}}
  private fun bg()=Brush.verticalGradient(listOf(Color(0xFF050509),Color(0xFF13051B)))
- @Composable fun NeonTheme(c:@Composable()->Unit)=MaterialTheme(colorScheme=darkColorScheme(primary=Color(0xFF8B5CF6),secondary=Color(0xFF00E5FF)),content=c)
+ @Composable fun NeonTheme(c: @Composable () -> Unit)=MaterialTheme(colorScheme=darkColorScheme(primary=Color(0xFF8B5CF6),secondary=Color(0xFF00E5FF)),content=c)
 }
