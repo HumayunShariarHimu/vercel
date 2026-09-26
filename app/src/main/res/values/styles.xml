@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><resources><style name="Theme.VercelApp" parent="android:style/Theme.Material.NoActionBar"><item name="android:fontFamily">sans</item><item name="android:statusBarColor">#050509</item><item name="android:navigationBarColor">#050509</item></style></resources>
