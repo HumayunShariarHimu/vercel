@@ -48,34 +48,29 @@ class MainActivity : Activity() {
             allowContentAccess = false
         }
 
-        val cookies = CookieManager.getInstance()
-        cookies.setAcceptCookie(true)
-        cookies.setAcceptThirdPartyCookies(webView, true)
+        CookieManager.getInstance().apply {
+            setAcceptCookie(true)
+            setAcceptThirdPartyCookies(webView, true)
+        }
 
         webView.webChromeClient = WebChromeClient()
         webView.webViewClient = object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
-                return handleUrl(request.url)
-            }
+            override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean =
+                handleUrl(request.url)
 
             @Deprecated("Deprecated in API 24")
-            override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-                return handleUrl(Uri.parse(url))
-            }
+            override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean =
+                handleUrl(Uri.parse(url))
         }
 
         setContentView(webView)
-        if (savedInstanceState == null) {
-            webView.loadUrl("https://vercel.com/dashboard")
-        } else {
-            webView.restoreState(savedInstanceState)
-        }
+        if (savedInstanceState == null) webView.loadUrl("https://vercel.com/dashboard")
+        else webView.restoreState(savedInstanceState)
     }
 
     private fun handleUrl(uri: Uri): Boolean {
         val scheme = uri.scheme?.lowercase() ?: return true
         if (scheme == "http" || scheme == "https") return false
-
         return try {
             startActivity(Intent(Intent.ACTION_VIEW, uri))
             true
@@ -84,6 +79,7 @@ class MainActivity : Activity() {
         }
     }
 
+    @Suppress("DEPRECATION")
     override fun onBackPressed() {
         if (::webView.isInitialized && webView.canGoBack()) webView.goBack()
         else super.onBackPressed()
@@ -97,8 +93,6 @@ class MainActivity : Activity() {
     override fun onDestroy() {
         if (::webView.isInitialized) {
             webView.stopLoading()
-            webView.webChromeClient = null
-            webView.webViewClient = null
             webView.destroy()
         }
         super.onDestroy()
