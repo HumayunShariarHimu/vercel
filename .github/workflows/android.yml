@@ -1,16 +1,20 @@
 name: Android CI
+
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
   workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '17'
@@ -18,8 +22,15 @@ jobs:
         with:
           gradle-version: '8.10'
       - name: Build debug APK
-        run: gradle assembleDebug
+        env:
+          VERCEL_CLIENT_ID: ${{ secrets.VERCEL_CLIENT_ID }}
+        run: gradle assembleDebug -PvercelClientId="${VERCEL_CLIENT_ID:-CONFIGURE_VERCEL_CLIENT_ID}"
+      - name: Verify APK
+        run: |
+          test -s app/build/outputs/apk/debug/app-debug.apk
+          ls -lh app/build/outputs/apk/debug/app-debug.apk
       - uses: actions/upload-artifact@v4
         with:
           name: vercel-app-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
