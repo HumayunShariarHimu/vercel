@@ -32,10 +32,10 @@ class MainActivity : Activity() {
     private lateinit var progress: ProgressBar
     private lateinit var errorView: LinearLayout
     private lateinit var titleView: TextView
-    private lateinit var backButton: ImageButton
-    private lateinit var forwardButton: ImageButton
-    private lateinit var refreshButton: ImageButton
-    private lateinit var menuButton: ImageButton
+    private lateinit var backButton: TextView
+    private lateinit var forwardButton: TextView
+    private lateinit var refreshButton: TextView
+    private lateinit var menuButton: TextView
     private var fileChooserCallback: android.webkit.ValueCallback<Array<Uri>>? = null
     private val fileChooserRequest = 7001
 
@@ -263,20 +263,17 @@ class MainActivity : Activity() {
         forwardButton.alpha = if (webView.canGoForward()) 1f else 0.35f
     }
 
-    private fun toolbarButton(symbol: String, description: String, action: () -> Unit): ImageButton =
-        ImageButton(this).apply {
+    private fun toolbarButton(symbol: String, description: String, action: () -> Unit): TextView =
+        TextView(this).apply {
             contentDescription = description
-            setImageDrawable(android.graphics.drawable.ColorDrawable(Color.TRANSPARENT))
-            setColorFilter(Color.WHITE)
+            text = symbol
+            textSize = 24f
+            setTextColor(Color.WHITE)
+            gravity = Gravity.CENTER
             setBackgroundColor(Color.TRANSPARENT)
-            val label = TextView(this@MainActivity).also {
-                it.text = symbol
-            }
+            setPadding(0, 0, 0, 0)
             setOnClickListener { action() }
-            tag = label
-            val lp = LinearLayout.LayoutParams(dp(40), dp(44))
-            lp.marginStart = dp(1)
-            layoutParams = lp
+            layoutParams = LinearLayout.LayoutParams(dp(40), dp(44))
         }
 
     private fun showAbout() {
