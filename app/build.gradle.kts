@@ -10,8 +10,8 @@ android {
   applicationId="com.himu.vercelapp"
   minSdk=26
   targetSdk=35
-  versionCode=2
-  versionName="1.1.0"
+  versionCode=3
+  versionName="1.2.0"
   val clientId = providers.gradleProperty("vercelClientId").orElse(providers.environmentVariable("VERCEL_CLIENT_ID")).orElse("CONFIGURE_VERCEL_CLIENT_ID").get()
   buildConfigField("String","VERCEL_CLIENT_ID","\"" + clientId + "\"")
  }
@@ -29,6 +29,7 @@ dependencies {
  implementation("androidx.compose.ui:ui")
  implementation("androidx.compose.ui:ui-tooling-preview")
  implementation("androidx.browser:browser:1.8.0")
+ implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
  implementation("com.squareup.okhttp3:okhttp:4.12.0")
  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
 }
