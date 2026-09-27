@@ -11,6 +11,7 @@ import android.view.Gravity
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import android.view.ViewGroup
 import android.webkit.CookieManager
 import android.webkit.WebChromeClient
 import android.webkit.WebResourceError
@@ -114,7 +115,7 @@ class MainActivity : Activity() {
         }
 
         webView = WebView(this)
-        swipe.addView(webView, SwipeRefreshLayout.LayoutParams(-1, -1))
+        swipe.addView(webView, ViewGroup.LayoutParams(-1, -1))
 
         errorView = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
@@ -312,7 +313,6 @@ class MainActivity : Activity() {
         if (::webView.isInitialized) {
             webView.stopLoading()
             webView.webChromeClient = null
-            webView.webViewClient = null
             webView.destroy()
         }
         super.onDestroy()
