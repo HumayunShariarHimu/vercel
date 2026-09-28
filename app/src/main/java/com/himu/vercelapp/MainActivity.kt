@@ -16,6 +16,8 @@ import android.webkit.CookieManager
 import android.webkit.WebChromeClient
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
+import android.webkit.SslErrorHandler
+import android.net.http.SslError
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -180,9 +182,15 @@ class MainActivity : Activity() {
             mediaPlaybackRequiresUserGesture = false
             allowFileAccess = false
             allowContentAccess = false
+            allowFileAccessFromFileURLs = false
+            allowUniversalAccessFromFileURLs = false
+            mixedContentMode = WebSettings.MIXED_CONTENT_NEVER_ALLOW
+            safeBrowsingEnabled = true
             cacheMode = WebSettings.LOAD_DEFAULT
             userAgentString = userAgentString + " VercelAndroid/1.2"
         }
+
+        WebView.setWebContentsDebuggingEnabled(false)
 
         CookieManager.getInstance().apply {
             setAcceptCookie(true)
@@ -233,6 +241,13 @@ class MainActivity : Activity() {
                 updateNavigation()
             }
 
+            override fun onReceivedSslError(view: WebView, handler: SslErrorHandler, error: SslError) {
+                // Never bypass certificate validation, even if the user is offered a retry.
+                handler.cancel()
+                errorView.visibility = View.VISIBLE
+                swipe.isRefreshing = false
+            }
+
             override fun onReceivedError(view: WebView, request: WebResourceRequest, error: WebResourceError) {
                 if (request.isForMainFrame) errorView.visibility = View.VISIBLE
                 swipe.isRefreshing = false
@@ -249,7 +264,14 @@ class MainActivity : Activity() {
 
     private fun handleUrl(uri: Uri): Boolean {
         val scheme = uri.scheme?.lowercase() ?: return true
-        if (scheme == "http" || scheme == "https") return false
+        if (scheme == "https") return false
+        if (scheme == "http") {
+            // Upgrade plain HTTP navigation rather than loading insecure content.
+            val secure = uri.buildUpon().scheme("https").build()
+            webView.loadUrl(secure.toString())
+            return true
+        }
+        if (scheme !in setOf("tel", "mailto")) return true
         return try {
             startActivity(Intent(Intent.ACTION_VIEW, uri))
             true
@@ -311,6 +333,7 @@ class MainActivity : Activity() {
     override fun onDestroy() {
         fileChooserCallback?.onReceiveValue(null)
         if (::webView.isInitialized) {
+            CookieManager.getInstance().flush()
             webView.stopLoading()
             webView.webChromeClient = null
             webView.destroy()
