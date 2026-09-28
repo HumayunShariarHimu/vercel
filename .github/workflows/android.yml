@@ -5,6 +5,8 @@ on:
     branches: [main]
     tags:
       - "v*"
+    paths-ignore:
+      - "downloads/**.apk"
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -16,9 +18,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
@@ -33,18 +37,27 @@ jobs:
       - name: Verify APK
         run: |
           test -s app/build/outputs/apk/debug/app-debug.apk
-          ls -lh app/build/outputs/apk/debug/app-debug.apk
+          mkdir -p downloads
+          cp app/build/outputs/apk/debug/app-debug.apk downloads/Vercel-Android-debug.apk
+          sha256sum downloads/Vercel-Android-debug.apk
+          ls -lh downloads/Vercel-Android-debug.apk
       - uses: actions/upload-artifact@v4
         with:
           name: vercel-app-debug-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: downloads/Vercel-Android-debug.apk
           if-no-files-found: error
           retention-days: 30
+      - name: Commit APK to main for direct download
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "build: publish latest debug APK"
+          file_pattern: downloads/Vercel-Android-debug.apk
       - name: Publish APK to GitHub Release
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
           name: Vercel Android ${{ github.ref_name }}
           generate_release_notes: true
-          files: app/build/outputs/apk/debug/app-debug.apk
+          files: downloads/Vercel-Android-debug.apk
           fail_on_unmatched_files: true
