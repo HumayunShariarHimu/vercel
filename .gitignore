@@ -12,8 +12,10 @@ local.properties
 
 # Generated
 captures/
-*.apk
 *.aab
+*.apk
+!downloads/
+!downloads/Vercel-Android-debug.apk
 
 # Local secrets
 *.jks
