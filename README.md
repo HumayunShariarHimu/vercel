@@ -9,7 +9,7 @@
 
 **Developed by Humayun Shariar Himu**
 
-[⬇ Direct APK download](https://github.com/MyselfHumayunShariarHimu/vercel/blob/main/downloads/Vercel-Android-debug.apk) · [Releases](https://github.com/MyselfHumayunShariarHimu/vercel/releases) · [Report a bug](https://github.com/MyselfHumayunShariarHimu/vercel/issues)
+[⬇ Direct APK download](https://raw.githubusercontent.com/MyselfHumayunShariarHimu/vercel/main/downloads/Vercel-Android-debug.apk) · [Releases](https://github.com/MyselfHumayunShariarHimu/vercel/releases) · [Report a bug](https://github.com/MyselfHumayunShariarHimu/vercel/issues)
 
 ---
 
@@ -46,7 +46,7 @@ GitHub Actions is configured to build a debug APK and commit it to:
 
 **downloads/Vercel-Android-debug.apk**
 
-[**Download Vercel-Android-debug.apk**](https://github.com/MyselfHumayunShariarHimu/vercel/blob/main/downloads/Vercel-Android-debug.apk)
+[**Download Vercel-Android-debug.apk**](https://raw.githubusercontent.com/MyselfHumayunShariarHimu/vercel/main/downloads/Vercel-Android-debug.apk)
 
 If the file is not available yet, check the [Android Actions workflow](https://github.com/MyselfHumayunShariarHimu/vercel/actions/workflows/android.yml) for a successful build and revisit the link. The repository APK is refreshed after a successful push-triggered build on main. Pull-request and manually dispatched builds upload a temporary workflow artifact instead.
 
@@ -87,7 +87,7 @@ You can also open the project in Android Studio and build or run it from the IDE
 Workflow: [.github/workflows/android.yml](.github/workflows/android.yml)
 
 - Pushes to main build and verify the debug APK.
-- Successful push builds copy the APK to downloads/Vercel-Android-debug.apk and commit it to the repository for direct download.
+- Successful push builds copy the APK to downloads/Vercel-Android-debug.apk and commit it to the repository for direct download (the APK is explicitly unignored in .gitignore).
 - Pull requests build the app and upload a temporary workflow artifact.
 - Workflow artifacts are retained for 30 days.
 - Push a version tag such as v1.2.1 to build the APK and attach it to a GitHub Release.
