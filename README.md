@@ -45,7 +45,7 @@ APK output:
 app/build/outputs/apk/debug/app-debug.apk
 ```
 
-GitHub Actions builds and verifies the APK automatically on pushes to `main`.
+GitHub Actions builds and verifies a debug APK automatically on pushes to `main`, and stores it as a workflow artifact for 30 days. To publish a downloadable APK on the repository's **Releases** page, create and push a version tag such as `v1.2.1`; the tagged workflow attaches `app-debug.apk` to the GitHub Release. The APK is a debug build for testing, not a signed production release. A public repository is required for unrestricted public downloads; repository visibility must be changed by an owner in GitHub Settings.
 
 ## 📦 Project structure
 
