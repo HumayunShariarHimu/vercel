@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07080d">
+  <meta name="description" content="Download Vercel for Android — a mobile-friendly shell for the official Vercel Dashboard.">
+  <meta property="og:title" content="Vercel for Android — Download">
+  <meta property="og:description" content="Your Vercel dashboard, tuned for Android.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://humayunshariarhimu.github.io/vercel/">
+  <title>Vercel for Android — Download</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: dark; --bg:#07080d; --surface:#0d1018; --surface-2:#121722; --line:#202938; --text:#f5f7fb; --muted:#9da9bd; --cyan:#52f2d0; --violet:#9c7bff; --pink:#fa70d1; --mono:'DM Mono',monospace; --sans:'Space Grotesk',system-ui,sans-serif; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--bg); color:var(--text); font-family:var(--sans); line-height:1.5; overflow-x:hidden; }
+    body:before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.35; background-image:linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px); background-size:48px 48px; mask-image:linear-gradient(to bottom,black,transparent 80%); }
+    a { color:inherit; text-decoration:none; }
+    .wrap { width:min(1120px, calc(100% - 40px)); margin:auto; }
+    header { position:relative; z-index:2; padding:24px 0; }
+    nav { display:flex; align-items:center; justify-content:space-between; }
+    .brand { display:flex; align-items:center; gap:12px; font-weight:700; letter-spacing:-.02em; }
+    .brand-mark { display:grid; place-items:center; width:34px; height:34px; background:#fff; color:#07080d; clip-path:polygon(50% 7%, 100% 93%, 0 93%); font-size:15px; font-weight:700; padding-top:8px; }
+    .brand small { display:block; color:var(--muted); font:400 10px var(--mono); letter-spacing:.08em; text-transform:uppercase; margin-top:1px; }
+    .nav-links { display:flex; gap:24px; color:var(--muted); font-size:14px; }
+    .nav-links a:hover { color:var(--cyan); }
+    .hero { position:relative; padding:86px 0 96px; display:grid; grid-template-columns:1.12fr .88fr; align-items:center; gap:70px; }
+    .eyebrow { display:inline-flex; align-items:center; gap:9px; border:1px solid #2c3c4a; border-radius:999px; padding:7px 11px; color:var(--cyan); font:500 11px var(--mono); letter-spacing:.1em; text-transform:uppercase; background:rgba(82,242,208,.06); }
+    .pulse { width:7px; height:7px; border-radius:50%; background:var(--cyan); box-shadow:0 0 0 4px rgba(82,242,208,.14), 0 0 16px var(--cyan); }
+    h1 { margin:22px 0 18px; max-width:650px; font-size:clamp(44px, 6vw, 78px); letter-spacing:-.075em; line-height:.98; }
+    h1 span { color:var(--cyan); text-shadow:0 0 34px rgba(82,242,208,.3); }
+    .lede { max-width:550px; margin:0; color:var(--muted); font-size:18px; }
+    .actions { display:flex; align-items:center; gap:14px; margin-top:34px; flex-wrap:wrap; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:48px; padding:0 18px; border-radius:10px; border:1px solid var(--line); font-weight:600; font-size:14px; transition:.2s ease; }
+    .btn-primary { color:#05100e; background:var(--cyan); border-color:var(--cyan); box-shadow:0 0 26px rgba(82,242,208,.22); }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 0 34px rgba(82,242,208,.42); }
+    .btn-ghost { color:var(--text); background:rgba(255,255,255,.03); }
+    .btn-ghost:hover { border-color:#566078; background:rgba(255,255,255,.07); }
+    .meta { margin-top:18px; color:#778297; font:400 11px var(--mono); }
+    .phone-stage { position:relative; min-height:430px; display:grid; place-items:center; }
+    .glow { position:absolute; width:330px; height:330px; border-radius:50%; background:radial-gradient(circle, rgba(156,123,255,.2), transparent 66%); filter:blur(5px); }
+    .phone { position:relative; width:218px; height:410px; border:7px solid #282f3d; border-radius:31px; padding:9px; background:#10141e; box-shadow:18px 22px 0 #0b0e15, 0 0 0 1px #414b5d, 0 20px 70px rgba(0,0,0,.7), 0 0 50px rgba(156,123,255,.25); transform:rotate(5deg); }
+    .phone:before { content:""; position:absolute; top:0; left:50%; transform:translateX(-50%); width:72px; height:17px; border-radius:0 0 12px 12px; background:#282f3d; }
+    .screen { height:100%; overflow:hidden; border-radius:20px; background:#0b0e14; }
+    .screen-top { height:71px; padding:26px 12px 0; background:linear-gradient(135deg,#131c2a,#121827); display:flex; justify-content:space-between; align-items:center; font:500 9px var(--mono); }
+    .screen-top b { font:700 16px var(--sans); letter-spacing:-.06em; }
+    .screen-body { padding:14px 11px; }
+    .screen-label { color:#7987a0; font:400 7px var(--mono); text-transform:uppercase; letter-spacing:.1em; }
+    .screen h3 { margin:5px 0 15px; font-size:18px; letter-spacing:-.05em; }
+    .chart { height:72px; border:1px solid #25364a; border-radius:8px; background:linear-gradient(180deg,rgba(82,242,208,.08),transparent),repeating-linear-gradient(0deg,transparent 0 17px,#203042 18px); position:relative; overflow:hidden; }
+    .chart svg { position:absolute; inset:0; width:100%; height:100%; }
+    .cards { display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-top:8px; }
+    .mini-card { padding:9px; border:1px solid #253042; border-radius:7px; background:#111722; } .mini-card i { display:block; width:18px; height:18px; border-radius:5px; background:var(--violet); margin-bottom:7px; } .mini-card:last-child i { background:var(--pink); } .mini-card strong { font-size:10px; } .mini-card small { display:block; color:#778297; font-size:7px; margin-top:2px; }
+    .tag { position:absolute; right:12px; bottom:38px; padding:8px 10px; border:1px solid #33454a; border-radius:8px; color:var(--cyan); background:#0e181a; font:400 10px var(--mono); box-shadow:0 0 22px rgba(82,242,208,.14); transform:rotate(-5deg); }
+    .section { padding:72px 0; border-top:1px solid rgba(255,255,255,.07); }
+    .section-head { display:flex; align-items:end; justify-content:space-between; gap:20px; margin-bottom:28px; }
+    .kicker { color:var(--violet); font:500 11px var(--mono); letter-spacing:.12em; text-transform:uppercase; }
+    h2 { margin:7px 0 0; font-size:clamp(28px,4vw,42px); letter-spacing:-.06em; line-height:1.05; }
+    .section-head p { max-width:390px; margin:0; color:var(--muted); font-size:14px; }
+    .features { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .feature { min-height:174px; padding:22px; border:1px solid var(--line); border-radius:14px; background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.012)); }
+    .feature:hover { border-color:#354a55; transform:translateY(-3px); transition:.2s ease; }
+    .feature-icon { display:grid; place-items:center; width:36px; height:36px; margin-bottom:22px; border-radius:10px; color:var(--cyan); background:rgba(82,242,208,.09); border:1px solid rgba(82,242,208,.2); font:500 14px var(--mono); }
+    .feature h3 { margin:0 0 8px; font-size:16px; } .feature p { margin:0; color:var(--muted); font-size:13px; }
+    .download-panel { display:grid; grid-template-columns:1.15fr .85fr; gap:30px; align-items:center; padding:30px; border:1px solid #2b4550; border-radius:18px; background:radial-gradient(circle at 90% 20%,rgba(82,242,208,.1),transparent 34%),#0d151a; }
+    .download-panel h2 { margin-bottom:12px; } .download-panel p { color:var(--muted); font-size:14px; max-width:550px; }
+    .details { display:grid; grid-template-columns:1fr 1fr; gap:1px; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--line); }
+    .detail { padding:14px; background:#0e131c; } .detail span { display:block; color:#758197; font:400 10px var(--mono); text-transform:uppercase; letter-spacing:.08em; margin-bottom:5px; } .detail strong { font:500 13px var(--mono); }
+    .install { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; counter-reset:steps; }
+    .step { position:relative; padding:23px; border-radius:14px; background:#0d1119; border:1px solid var(--line); } .step:before { counter-increment:steps; content:'0' counter(steps); color:var(--cyan); font:500 12px var(--mono); } .step h3 { margin:18px 0 7px; font-size:16px; } .step p { margin:0; color:var(--muted); font-size:13px; }
+    footer { padding:34px 0 45px; border-top:1px solid rgba(255,255,255,.07); color:#778297; font-size:13px; } .footer-inner { display:flex; justify-content:space-between; gap:20px; align-items:center; } .footer-links { display:flex; gap:18px; } .footer-links a:hover { color:var(--cyan); } .credit { color:var(--text); } .credit span { color:var(--cyan); }
+    @media (max-width:780px) { .wrap { width:min(100% - 28px, 620px); } .nav-links { display:none; } .hero { grid-template-columns:1fr; gap:25px; padding:58px 0 68px; } .phone-stage { min-height:390px; } .features,.install { grid-template-columns:1fr; } .download-panel { grid-template-columns:1fr; padding:22px; } .section { padding:55px 0; } .section-head { display:block; } .section-head p { margin-top:12px; } .footer-inner { align-items:flex-start; flex-direction:column; } }
+    @media (prefers-reduced-motion:no-preference) { .phone { animation:float 5s ease-in-out infinite; } @keyframes float { 0%,100%{transform:rotate(5deg) translateY(0)} 50%{transform:rotate(3deg) translateY(-9px)} } }
+  </style>
+</head>
+<body>
+  <header><div class="wrap"><nav><a class="brand" href="#top" aria-label="Vercel for Android home"><span class="brand-mark">▲</span><span>Vercel for Android<small>community client</small></span></a><div class="nav-links"><a href="#features">Features</a><a href="#download">Download</a><a href="#install">Install</a></div></nav></div></header>
+  <main id="top">
+    <section class="wrap hero">
+      <div><div class="eyebrow"><span class="pulse"></span> Latest build · v1.2.0</div><h1>Your Vercel dashboard.<br><span>In your pocket.</span></h1><p class="lede">A focused Android shell for the official Vercel Dashboard. Manage projects, deployments, and teams wherever you ship.</p><div class="actions"><a class="btn btn-primary" href="downloads/Vercel-Android-debug.apk" download>↓ &nbsp;Download APK</a><a class="btn btn-ghost" href="https://github.com/HumayunShariarHimu/vercel" target="_blank" rel="noopener">View source ↗</a></div><p class="meta">ANDROID 8.0+ &nbsp;·&nbsp; 9 MB &nbsp;·&nbsp; DEBUG BUILD</p></div>
+      <div class="phone-stage" aria-label="Preview of the Vercel Android app"><div class="glow"></div><div class="phone"><div class="screen"><div class="screen-top"><b>▲ Vercel</b><span>•••</span></div><div class="screen-body"><span class="screen-label">overview / production</span><h3>Good evening, Himu</h3><div class="chart"><svg viewBox="0 0 196 72" preserveAspectRatio="none" aria-hidden="true"><path d="M0 57 C15 52 18 60 32 48 S53 54 66 38 S82 43 94 28 S115 36 126 22 S145 33 158 14 S181 25 196 7" fill="none" stroke="#52f2d0" stroke-width="2"/><path d="M0 57 C15 52 18 60 32 48 S53 54 66 38 S82 43 94 28 S115 36 126 22 S145 33 158 14 S181 25 196 7 V72 H0Z" fill="url(#fade)" opacity=".18"/><defs><linearGradient id="fade" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#52f2d0"/><stop offset="1" stop-color="#52f2d0" stop-opacity="0"/></linearGradient></defs></svg></div><div class="cards"><div class="mini-card"><i></i><strong>web-app</strong><small>Ready · 2m ago</small></div><div class="mini-card"><i></i><strong>api-edge</strong><small>Ready · 8m ago</small></div></div></div></div></div><div class="tag">deploy faster →</div></div>
+    </section>
+    <section class="section" id="features"><div class="wrap"><div class="section-head"><div><div class="kicker">Built for the workflow</div><h2>Everything you need.<br>Nothing in the way.</h2></div><p>Designed around the official Vercel Dashboard, with a lightweight native shell that feels at home on Android.</p></div><div class="features"><article class="feature"><div class="feature-icon">01</div><h3>Official dashboard access</h3><p>Sign in through Vercel and access the projects, teams, and permissions attached to your account.</p></article><article class="feature"><div class="feature-icon">02</div><h3>Native Android controls</h3><p>Back, forward, refresh, pull-to-refresh, progress, and file picking work the way you expect.</p></article><article class="feature"><div class="feature-icon">03</div><h3>Secure by default</h3><p>HTTPS-only navigation, strict TLS handling, Safe Browsing, and no local file access.</p></article></div></div></section>
+    <section class="section" id="download"><div class="wrap"><div class="download-panel"><div><div class="kicker">Get the latest build</div><h2>Ready to ship?</h2><p>Download the APK directly from this repository. This is an unsigned debug/testing build — review the source and install only if you trust it.</p><a class="btn btn-primary" href="downloads/Vercel-Android-debug.apk" download>↓ &nbsp;Download Vercel Android</a></div><div class="details"><div class="detail"><span>Version</span><strong>1.2.0</strong></div><div class="detail"><span>Package</span><strong>com.himu.vercelapp</strong></div><div class="detail"><span>Platform</span><strong>Android 8.0+</strong></div><div class="detail"><span>License</span><strong>MIT</strong></div></div></div></div></section>
+    <section class="section" id="install"><div class="wrap"><div class="section-head"><div><div class="kicker">Three quick steps</div><h2>Install and get moving.</h2></div><p>Keep Android System WebView up to date for the best dashboard experience.</p></div><div class="install"><article class="step"><h3>Download the APK</h3><p>Tap the download button above and save the file on your Android device.</p></article><article class="step"><h3>Allow the install</h3><p>Open the file. If prompted, allow installation from this source in Android settings.</p></article><article class="step"><h3>Sign in securely</h3><p>Open the app and sign in only through the Vercel-hosted login page.</p></article></div></div></section>
+  </main>
+  <footer><div class="wrap footer-inner"><div>© 2026 Vercel for Android · Independent open-source client</div><div class="footer-links"><a href="https://github.com/HumayunShariarHimu/vercel" target="_blank" rel="noopener">Repository ↗</a><a href="https://github.com/HumayunShariarHimu" target="_blank" rel="noopener" class="credit">Developed by <span>Humayun Shariar Himu</span> ↗</a></div></div></footer>
+</body>
+</html>
