@@ -27,7 +27,7 @@
       --max: 1160px;
     }
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; -webkit-text-size-adjust: 100%; }
     body {
       margin: 0;
       color: var(--text);
@@ -48,7 +48,7 @@
     }
     a { color: inherit; text-decoration: none; }
     button, a { -webkit-tap-highlight-color: transparent; }
-    .wrap { width: min(var(--max), calc(100% - 48px)); margin-inline: auto; }
+    .wrap { width: min(var(--max), calc(100% - 48px)); margin-inline: auto; }\n    img, svg, video { max-width: 100%; }\n    a, button { touch-action: manipulation; }
     .mono { font-family: var(--mono); letter-spacing: .04em; }
     .eyebrow {
       display: inline-flex; align-items: center; gap: 10px;
@@ -187,7 +187,7 @@
       .chip-one { right: 8%; } .chip-two { left: 8%; }
     }
     @media (max-width: 620px) {
-      .wrap { width: min(var(--max), calc(100% - 32px)); }
+      .wrap { width: min(var(--max), calc(100% - 32px)); }\n      .nav { padding-top: env(safe-area-inset-top); }\n      .hero-actions { align-items: stretch; }\n      .hero-actions .button { min-height: 46px; }\n      .download-actions .button { min-height: 46px; width: 100%; }
       .nav-inner { height: 66px; }
       .nav-links { display: none; }
       .nav-cta { padding: 10px 12px; font-size: 11px; }
@@ -297,9 +297,9 @@
           <div>
             <span class="eyebrow">Android build</span>
             <h2>Take it with you.</h2>
-            <p>Find the Android package in the project repository and review the release details before installing. Build availability and compatibility depend on the package currently published in the repository.</p>
+            <p>Download the Android APK directly using the button below. The link points to the APK file in the project repository, rather than opening the downloads folder. Confirm that the file exists at this path and review the source before installing.</p>
             <div class="download-actions">
-              <a class="button primary" href="https://github.com/HumayunShariarHimu/vercel/tree/main/downloads" target="_blank" rel="noopener noreferrer">Browse APK files <span class="arrow">↗</span></a>
+              <a class="button primary" href="https://github.com/HumayunShariarHimu/vercel/raw/refs/heads/main/downloads/Vercel-Android-debug.apk" download="Vercel-Android-debug.apk">Download APK directly <span class="arrow">↓</span></a>
               <a class="button secondary" href="https://github.com/HumayunShariarHimu/vercel" target="_blank" rel="noopener noreferrer">View repository <span class="arrow">↗</span></a>
             </div>
             <div class="notice"><span>ⓘ</span><span><b>Before installing:</b> this is an independent community project, not an official Vercel application. Only install packages you trust, review the source where possible, and check the repository for current release information.</span></div>
@@ -307,7 +307,7 @@
           <aside class="build-card" aria-label="Build information">
             <div class="build-top"><strong>Build information</strong><span class="build-tag">REPOSITORY</span></div>
             <div class="build-row"><span>Platform</span><span>Android</span></div>
-            <div class="build-row"><span>Package source</span><span>GitHub repository</span></div>
+            <div class="build-row"><span>Package source</span><span>Direct APK file link</span></div>
             <div class="build-row"><span>Release status</span><span>Check latest files</span></div>
             <div class="build-row"><span>Project type</span><span>Community-built</span></div>
           </aside>
